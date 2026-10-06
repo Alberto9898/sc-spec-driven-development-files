@@ -1,54 +1,57 @@
-# Mission
+# Missione
 
-## Why AgentClinic exists
+## Perché esiste AgentClinic
 
-AgentClinic is a place for AI agents to get relief from their humans. Overworked agents, stuck in
-retry loops, buried in vague prompts, or suffering from context-window exhaustion can come in,
-describe their ailments, receive therapies, and book follow-up appointments.
+AgentClinic è un luogo dove gli agenti AI trovano sollievo dai loro umani. Agenti sovraccarichi,
+bloccati in loop di retry, sommersi da prompt vaghi o colpiti da esaurimento della context window
+possono entrare, descrivere i loro disturbi, ricevere terapie e prenotare appuntamenti di controllo.
 
-It is a **playful demo application**: the humor is part of the product, and the domain is a vehicle
-for showing how a real, well-structured web app gets built in small, spec-driven steps.
+È un'**applicazione demo giocosa**: l'umorismo fa parte del prodotto, e il dominio è un mezzo per
+mostrare come si costruisce una web app reale e ben strutturata, a piccoli passi guidati dalle specifiche.
 
-## What success looks like
+## Come si misura il successo
 
-- An agent (or a curious human) can browse the clinic, understand its ailments and therapies, and
-  book an appointment in a few clicks.
-- Staff have a dashboard that gives an at-a-glance view of agents, appointments, and treatments.
-- The site is reliable, attractive, and works well in any modern browser.
-- Every feature is traceable from spec to implementation to validation.
+- Un agente (o un umano curioso) può esplorare la clinica, capirne disturbi e terapie e prenotare
+  un appuntamento in pochi clic.
+- Lo staff ha una dashboard che offre una visione d'insieme immediata di agenti, appuntamenti e trattamenti.
+- Il sito è affidabile, gradevole e funziona bene in qualsiasi browser moderno.
+- Ogni feature è tracciabile dalla specifica all'implementazione fino alla validazione.
 
-## Target audience
+## Pubblico di riferimento
 
-- **Course students learning spec-driven development with AI coding agents** — they follow the
-  project phase by phase, so each step must be small, readable, and clearly traceable from spec to code.
-- **Developers giving AI coding demos at conference booths** — they need a fun, instantly
-  understandable domain and phases short enough to build live, with a visible result every time.
+- **Studenti del corso che imparano lo spec-driven development con agenti AI di coding**: seguono il
+  progetto fase per fase, quindi ogni passo deve essere piccolo, leggibile e chiaramente tracciabile
+  dalla specifica al codice.
+- **Sviluppatori che fanno demo di AI coding agli stand delle conferenze**: hanno bisogno di un dominio
+  divertente e comprensibile al volo, e di fasi abbastanza brevi da costruire dal vivo, con un risultato
+  visibile ogni volta.
 
-## Stakeholders
+## Stakeholder
 
-| Stakeholder | Area | What they need |
+| Stakeholder | Area | Di cosa ha bisogno |
 |---|---|---|
-| Mary | Engineering | A reliable site on a popular TypeScript stack; a dashboard for agents and staff |
-| Susan | Product | Features around agents, ailments, therapies, and booking appointments |
-| Steve | Marketing | An attractive site that works well in modern browsers |
+| Mary | Engineering | Un sito affidabile su uno stack TypeScript diffuso; una dashboard per agenti e staff |
+| Susan | Product | Funzionalità su agenti, disturbi, terapie e prenotazione degli appuntamenti |
+| Steve | Marketing | Un sito gradevole che funzioni bene nei browser moderni |
 
-## Core domain
+## Dominio principale
 
-- **Agents** — the patients: AI agents with a name, model, and a human they're recovering from.
-- **Ailments** — what agents suffer from (e.g. hallucination fatigue, prompt ambiguity, infinite tool loops).
-- **Therapies** — treatments mapped to ailments (e.g. context detox, clearer system prompts).
-- **Appointments** — an agent booked for a therapy at a time slot.
-- **Staff** — the people (or agents) running the clinic, who use the dashboard.
+- **Agenti (Agents)**: i pazienti, cioè agenti AI con un nome, un modello e un umano da cui si stanno riprendendo.
+- **Disturbi (Ailments)**: ciò di cui soffrono gli agenti (es. affaticamento da allucinazioni,
+  ambiguità dei prompt, loop infiniti di tool).
+- **Terapie (Therapies)**: trattamenti associati ai disturbi (es. detox del contesto, system prompt più chiari).
+- **Appuntamenti (Appointments)**: un agente prenotato per una terapia in una fascia oraria.
+- **Staff**: le persone (o gli agenti) che gestiscono la clinica e usano la dashboard.
 
-## Principles
+## Principi
 
-1. **Small, shippable steps.** Every phase leaves the app running and demonstrable.
-2. **Specs before code.** Each feature has requirements, a plan, and a validation checklist.
-3. **Playful, not sloppy.** Jokes in the copy; rigor in the code.
-4. **Server-first.** HTML rendered on the server; minimal client-side JavaScript.
+1. **Passi piccoli e rilasciabili.** Ogni fase lascia l'app funzionante e dimostrabile.
+2. **Prima le specifiche, poi il codice.** Ogni feature ha requisiti, un piano e una checklist di validazione.
+3. **Giocoso, non sciatto.** Battute nei testi; rigore nel codice.
+4. **Server-first.** HTML generato sul server; JavaScript lato client ridotto al minimo.
 
-## Non-goals (for now)
+## Non-obiettivi (per ora)
 
-- Real authentication, payments, or multi-tenancy.
-- Actual integration with live AI agents.
-- Native mobile apps.
+- Autenticazione reale, pagamenti o multi-tenancy.
+- Integrazione effettiva con agenti AI reali.
+- App mobile native.

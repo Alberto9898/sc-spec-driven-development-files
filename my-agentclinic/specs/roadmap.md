@@ -1,45 +1,46 @@
 # Roadmap
 
-High-level implementation order. Each phase is intentionally small, leaves the app runnable,
-and gets its own spec folder (`specs/YYYY-MM-DD-<feature>/` with requirements, plan, validation).
+Ordine di implementazione ad alto livello. Ogni fase è volutamente piccola, lascia l'app funzionante
+e ha una propria cartella di specifiche (`specs/YYYY-MM-DD-<feature>/` con requisiti, piano e validazione).
 
-## Phase 1 — Hello Hono
-- Switch project to ESM, add Hono + `@hono/node-server` + `tsx`.
-- Single route `/` returning "Welcome to AgentClinic".
-- `npm run dev` works.
+## Fase 1 — Hello Hono
+- Passare il progetto a ESM, aggiungere Hono + `@hono/node-server` + `tsx`; JSX configurato.
+- Un'unica route `/` che serve una home page AgentClinic minimale e senza stile (titolo
+  "Welcome to AgentClinic" + tagline giocosa), renderizzata inline con Hono JSX.
+- `npm run dev`, `build` e `start` funzionano.
 
-## Phase 2 — Layout shell
-- JSX `Layout` with `Header`, `Main`, `Footer` components.
-- Static CSS served; basic branding and color palette.
-- Home page with a playful hero section.
+## Fase 2 — Struttura del layout
+- `Layout` JSX con i componenti `Header`, `Main`, `Footer`.
+- CSS statico servito; branding di base e palette di colori.
+- Spostare la home page della Fase 1 in `pages/Home` e farla crescere in una sezione hero giocosa.
 
-## Phase 3 — Database foundation
-- Add SQLite (`better-sqlite3`), migration runner, and seed script.
-- No UI change beyond a health/status indicator.
+## Fase 3 — Fondamenta del database
+- Aggiungere SQLite (`better-sqlite3`), un runner di migrazioni e uno script di seed.
+- Nessuna modifica alla UI oltre a un indicatore di stato/salute.
 
-## Phase 4 — Agents
-- `agents` table + seed data.
-- List page and detail page for agents.
+## Fase 4 — Agenti
+- Tabella `agents` + dati di seed.
+- Pagina elenco e pagina di dettaglio degli agenti.
 
-## Phase 5 — Ailments
-- `ailments` table, linked to agents.
-- Ailments catalog page; ailments shown on agent detail.
+## Fase 5 — Disturbi
+- Tabella `ailments`, collegata agli agenti.
+- Pagina catalogo dei disturbi; disturbi mostrati nel dettaglio dell'agente.
 
-## Phase 6 — Therapies
-- `therapies` table, mapped to ailments.
-- Therapies catalog; "recommended therapies" on ailment pages.
+## Fase 6 — Terapie
+- Tabella `therapies`, associata ai disturbi.
+- Catalogo delle terapie; "terapie consigliate" nelle pagine dei disturbi.
 
-## Phase 7 — Appointments
-- `appointments` table.
-- Booking form (server-side validation, no JS required) and confirmation page.
-- Upcoming appointments shown on agent detail.
+## Fase 7 — Appuntamenti
+- Tabella `appointments`.
+- Form di prenotazione (validazione lato server, nessun JS richiesto) e pagina di conferma.
+- Prossimi appuntamenti mostrati nel dettaglio dell'agente.
 
-## Phase 8 — Staff dashboard
-- Dashboard page: counts, today's appointments, most common ailments.
+## Fase 8 — Dashboard dello staff
+- Pagina dashboard: conteggi, appuntamenti di oggi, disturbi più comuni.
 
-## Phase 9 — Polish
-- Responsive layout, accessibility pass, empty/error states, 404 page.
-- Marketing copy and visual polish.
+## Fase 9 — Rifinitura
+- Layout responsive, verifica di accessibilità, stati vuoti/di errore, pagina 404.
+- Testi di marketing e rifinitura visiva.
 
-## Later / ideas
-- Staff login, appointment rescheduling/cancellation, agent self-intake form.
+## In futuro / idee
+- Login dello staff, riprogrammazione/cancellazione degli appuntamenti, form di auto-accettazione per gli agenti.

@@ -1,37 +1,36 @@
-# Phase 1 — Hello Hono: Validation
+# Fase 1 — Hello Hono: Validazione
 
-The branch `phase-1-hello-hono` can be merged when **every** item below is checked.
-All checks are manual; there is no test framework in this phase.
+Il branch `phase-1-hello-hono` può essere unito quando **ogni** voce qui sotto è spuntata.
+Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 
 ## Setup
-- [ ] `npm install` finishes with no errors on a clean checkout.
-- [ ] `package.json` has `"type": "module"`, lists `hono` and `@hono/node-server` in `dependencies`,
-      and lists `tsx` and `typescript` in `devDependencies`.
-- [ ] `tsconfig.json` uses `ES2022` / `NodeNext` with `jsxImportSource: "hono/jsx"`, and `strict` is still `true`.
-- [ ] `src/index.ts` no longer exists, and `src/index.tsx` is the only source file.
+- [x] `npm install` termina senza errori su un checkout pulito.
+- [x] `package.json` contiene `"type": "module"`, elenca `hono` e `@hono/node-server` in `dependencies`,
+      ed elenca `tsx` e `typescript` in `devDependencies`.
+- [x] `tsconfig.json` usa `ES2022` / `NodeNext` con `jsxImportSource: "hono/jsx"`, e `strict` è ancora `true`.
+- [x] `src/index.ts` non esiste più, e `src/index.tsx` è l'unico file sorgente.
 
-## Dev server
-- [ ] `npm run dev` starts and logs `AgentClinic running at http://localhost:3000`.
-- [ ] Editing the tagline in `src/index.tsx` triggers an automatic restart (watch mode works).
-- [ ] An unknown path (e.g. `/nope`) returns `404`. This is Hono's default; no custom page is needed.
+## Server di sviluppo
+- [x] `npm run dev` si avvia e stampa `AgentClinic running at http://localhost:3000`.
+- [x] Modificare la tagline in `src/index.tsx` provoca un riavvio automatico (il watch mode funziona).
+- [x] Un percorso sconosciuto (es. `/nope`) restituisce `404`. È il comportamento predefinito di Hono; non serve una pagina personalizzata.
 
 ## Home page
-- [ ] `curl -i http://localhost:3000/` returns `200` with `Content-Type: text/html; charset=UTF-8`.
-- [ ] The response body starts with `<!DOCTYPE html>` and contains `<html lang="en">`,
-      `<meta charset="utf-8">`, the viewport meta tag, and `<title>AgentClinic</title>`.
-- [ ] The body contains `<h1>Welcome to AgentClinic</h1>` and one playful tagline.
-- [ ] In a browser, the tab title reads "AgentClinic", and the heading and tagline render with no
-      console errors.
-- [ ] No CSS, static files, or `components/`/`pages/` folders were added (those wait for Phase 2).
+- [x] `curl -i http://localhost:3000/` restituisce `200` con `Content-Type: text/html; charset=UTF-8`.
+- [x] Il corpo della risposta inizia con `<!DOCTYPE html>` e contiene `<html lang="en">`,
+      `<meta charset="utf-8">`, il meta tag viewport e `<title>AgentClinic</title>`.
+- [x] Il corpo contiene `<h1>Welcome to AgentClinic</h1>` e una tagline giocosa.
+- [ ] Nel browser, il titolo della scheda è "AgentClinic", e titolo e tagline vengono mostrati senza
+      errori in console.
+- [x] Non sono stati aggiunti CSS, file statici o cartelle `components/`/`pages/` (sono rimandati alla Fase 2).
 
-## Build & production start
-- [ ] `npm run build` exits with code 0 and no type errors.
-- [ ] `dist/index.js` exists and is ES module output (`import`, not `require`).
-- [ ] `npm start` serves the same home page on `/` as the dev server.
+## Build e avvio in produzione
+- [x] `npm run build` termina con codice 0 e senza errori di tipo.
+- [x] `dist/index.js` esiste ed è output ES module (`import`, non `require`).
+- [x] `npm start` serve su `/` la stessa home page del server di sviluppo.
 
-## Traceability & hygiene
-- [ ] Every task in [plan.md](./plan.md) is done or explicitly marked as deferred.
-- [ ] `README.md` explains how to run the app.
-- [ ] No files outside the scope in [requirements.md](./requirements.md) were changed.
-- [ ] `dist/` is not committed. This needs a decision, because `.gitignore` doesn't cover it yet
-      (see the Open points in requirements.md).
+## Tracciabilità e ordine
+- [ ] Ogni task in [plan.md](./plan.md) è completato o esplicitamente segnato come rimandato.
+- [x] `README.md` spiega come avviare l'app.
+- [ ] Nessun file fuori dal perimetro di [requirements.md](./requirements.md) è stato modificato.
+- [x] `dist/` non è committato, e `.gitignore` contiene `/dist`.

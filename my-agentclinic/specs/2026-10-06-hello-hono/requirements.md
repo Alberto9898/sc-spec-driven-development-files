@@ -1,63 +1,66 @@
-# Phase 1 — Hello Hono: Requirements
+# Fase 1 — Hello Hono: Requisiti
 
 Branch: `phase-1-hello-hono`
-References: [mission](../mission.md), [tech stack](../tech-stack.md), [roadmap](../roadmap.md) (Phase 1)
+Riferimenti: [missione](../mission.md), [stack tecnologico](../tech-stack.md), [roadmap](../roadmap.md) (Fase 1)
 
-## Context
+## Contesto
 
-The project is currently a CommonJS TypeScript stub (`target: es2016`, `module: commonjs`) whose
-only source file is `src/index.ts`, which logs a message. Phase 1 turns it into the smallest runnable
-Hono web app, with a minimal AgentClinic home page. That gives every later phase a running server to
-build on, in line with the "small, shippable steps" principle, and gives demos something to open in a
-browser from the very first phase.
+Il progetto è oggi uno stub TypeScript CommonJS (`target: es2016`, `module: commonjs`) il cui unico
+file sorgente è `src/index.ts`, che stampa un messaggio. La Fase 1 lo trasforma nella più piccola web
+app Hono eseguibile, con una home page AgentClinic minimale. In questo modo ogni fase successiva ha un
+server funzionante su cui costruire, in linea con il principio dei "passi piccoli e rilasciabili", e le
+demo hanno qualcosa da aprire nel browser fin dalla prima fase.
 
-## Scope
+## Perimetro
 
-### In scope
-- Switch the project to ES modules (`"type": "module"` in `package.json`).
-- Update `tsconfig.json` to the target from the tech stack: `target: ES2022`, Node ESM module
-  resolution (`NodeNext`), strict mode kept.
-- Configure JSX for Hono (`jsx: react-jsx`, `jsxImportSource: hono/jsx`).
-- Rename `src/index.ts` → `src/index.tsx`.
-- Add runtime dependencies `hono` and `@hono/node-server`, and the dev dependency `tsx`.
-- One route, `GET /`, that serves a **minimal AgentClinic home page**:
-  - a complete HTML document: `<!DOCTYPE html>`, `<html lang="en">`, `<meta charset="utf-8">`,
-    a viewport meta tag, and `<title>AgentClinic</title>`
-  - an `<h1>` with the text **"Welcome to AgentClinic"**
-  - one short, playful tagline in a `<p>` (e.g. "Where overworked AI agents come to recover from their humans.")
-  - rendered on the server with Hono JSX (`c.html(...)`), written inline in `src/index.tsx`
-- npm scripts:
+### Incluso
+- Passare il progetto a ES modules (`"type": "module"` in `package.json`).
+- Aggiornare `tsconfig.json` al target indicato nello stack tecnologico: `target: ES2022`, risoluzione
+  dei moduli Node ESM (`NodeNext`), strict mode mantenuto.
+- Configurare JSX per Hono (`jsx: react-jsx`, `jsxImportSource: hono/jsx`).
+- Rinominare `src/index.ts` → `src/index.tsx`.
+- Aggiungere le dipendenze runtime `hono` e `@hono/node-server`, e la dipendenza di sviluppo `tsx`.
+- Un'unica route, `GET /`, che serve una **home page AgentClinic minimale**:
+  - un documento HTML completo: `<!DOCTYPE html>`, `<html lang="en">`, `<meta charset="utf-8">`,
+    un meta tag viewport e `<title>AgentClinic</title>`
+  - un `<h1>` con il testo **"Welcome to AgentClinic"**
+  - una breve tagline giocosa in un `<p>` (es. "Where overworked AI agents come to recover from their humans.")
+  - renderizzata sul server con Hono JSX (`c.html(...)`), scritta inline in `src/index.tsx`
+- Script npm:
   - `dev` — `tsx watch src/index.tsx`
   - `build` — `tsc`
   - `start` — `node dist/index.js`
-- The server listens on port **3000** and logs its URL on startup.
+- Il server ascolta sulla porta **3000** e stampa il suo URL all'avvio.
+- Aggiungere `/dist` a `.gitignore`, così l'output di `npm run build` non viene committato.
 
-### Out of scope (later phases)
-- Reusable components (`Layout`, `Header`, `Main`, `Footer`), a `pages/` folder, CSS, static
-  files, branding and color palette, and the hero section (Phase 2).
-- Database, migrations, seed data (Phase 3).
-- A test framework or automated tests.
-- A configurable `PORT` env var, and adding `dist/` to `.gitignore` (see Open points).
+### Escluso (fasi successive)
+- Componenti riutilizzabili (`Layout`, `Header`, `Main`, `Footer`), una cartella `pages/`, CSS,
+  file statici, branding e palette di colori, e la sezione hero (Fase 2).
+- Database, migrazioni, dati di seed (Fase 3).
+- Un framework di test o test automatici.
+- Una variabile d'ambiente `PORT` configurabile.
 
-## Decisions
+## Decisioni
 
-| Decision | Rationale |
+| Decisione | Motivazione |
 |---|---|
-| Hono + `@hono/node-server` | Chosen in tech-stack.md: TS-first, built-in JSX SSR, little magic. |
-| `tsx` for dev, `tsc` for build | Fast watch mode in dev; `tsc` keeps type-checking strict and is the single build step. |
-| `module`/`moduleResolution: NodeNext` | Matches Node's real ESM resolution. Consequence: relative imports must use a `.js` extension (e.g. `./components/Layout.js`) from Phase 2 onward. |
-| JSX configured in Phase 1 | The home page already uses JSX, and Phase 2 then only adds UI without touching the tooling. |
-| Minimal HTML home page instead of plain text | Gives a visible, browser-friendly result in the first phase. It goes beyond the roadmap's literal "returning text", but the `<h1>` keeps the same "Welcome to AgentClinic" message. |
-| Home page markup inline in `src/index.tsx` | Keeps Phase 1 to a single source file. Splitting it into `Layout` and `pages/Home` is exactly what Phase 2 is for. |
-| No CSS | Unstyled browser defaults are fine here; styling belongs to Phase 2. |
-| Fixed port 3000 | Simplest option for a demo; making it configurable is deferred. |
+| Hono + `@hono/node-server` | Scelto in tech-stack.md: TS-first, JSX SSR integrato, poca "magia". |
+| `tsx` in sviluppo, `tsc` per la build | Watch mode veloce in sviluppo; `tsc` mantiene un type-checking rigoroso ed è l'unico passo di build. |
+| `module`/`moduleResolution: NodeNext` | Rispecchia la reale risoluzione ESM di Node. Conseguenza: dalla Fase 2 in poi gli import relativi devono usare l'estensione `.js` (es. `./components/Layout.js`). |
+| JSX configurato nella Fase 1 | La home page usa già JSX, così la Fase 2 aggiunge solo UI senza toccare gli strumenti. |
+| Home page HTML minimale invece di testo semplice | Dà un risultato visibile e adatto al browser già nella prima fase. La roadmap in origine diceva "restituire testo" ed è stata aggiornata di conseguenza. L'`<h1>` mantiene lo stesso messaggio "Welcome to AgentClinic". |
+| Markup della home page inline in `src/index.tsx` | Mantiene la Fase 1 a un solo file sorgente. Suddividerlo in `Layout` e `pages/Home` è esattamente lo scopo della Fase 2. |
+| Nessun CSS | Gli stili predefiniti del browser vanno bene qui; lo styling appartiene alla Fase 2. |
+| Porta fissa 3000 | L'opzione più semplice per una demo; renderla configurabile è rimandato. |
+| `/dist` in `.gitignore` | Inizialmente esclusa dal perimetro; inclusa durante l'implementazione, perché il primo `npm run build` ha reso concreto il rischio di committare l'output compilato. È una riga e non ha effetti sul resto. |
 
-## Open points / risks
-- **`dist/` is not in `.gitignore`.** Once `npm run build` runs, the compiled output can be
-  committed by mistake. This is a one-line fix, deliberately left out of scope here. Reconsider it
-  before merging.
-- **Overlap with Phase 2.** The roadmap's Phase 2 bullet "Home page with a playful hero section"
-  will now build on this minimal page instead of creating it. Phase 2's spec should say that it
-  refactors the inline markup into `Layout` + `pages/Home` and adds the hero.
-- `tsx` and `tsc` handle JSX through different paths (esbuild vs. the TS compiler). Both read
-  `tsconfig.json`, but validation checks both `dev` and `build`/`start` so that drift is caught.
+## Punti aperti / rischi
+- **`dist/` non era in `.gitignore` (risolto).** Dopo il primo `npm run build` l'output compilato
+  poteva essere committato per errore. Decisione: `/dist` è stato aggiunto a `.gitignore` in questa
+  fase (vedi Decisioni).
+- **Sovrapposizione con la Fase 2 (risolta in roadmap.md).** La roadmap ora dice che la Fase 2
+  sposta questa home page inline in `Layout` + `pages/Home` e la fa crescere nella sezione hero,
+  invece di creare la pagina da zero.
+- `tsx` e `tsc` gestiscono JSX con percorsi diversi (esbuild contro il compilatore TS). Entrambi
+  leggono `tsconfig.json`, ma la validazione verifica sia `dev` sia `build`/`start` per intercettare
+  eventuali divergenze.

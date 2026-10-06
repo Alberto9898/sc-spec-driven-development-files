@@ -1,51 +1,52 @@
-# Tech Stack
+# Stack tecnologico
 
-## Language & runtime
+## Linguaggio e runtime
 
-- **TypeScript** (strict mode), server-side.
-- **Node.js** LTS as the runtime.
-- ES modules (`"type": "module"`), modern `target` (ES2022) — replaces the current CommonJS/ES2016 `tsconfig.json`.
+- **TypeScript** (strict mode), lato server.
+- **Node.js** LTS come runtime.
+- ES modules (`"type": "module"`), `target` moderno (ES2022): sostituisce l'attuale `tsconfig.json` CommonJS/ES2016.
 
-## Web framework: Hono (recommended)
+## Framework web: Hono (consigliato)
 
-**Why Hono**
-- TypeScript-first, with excellent type inference for routes and handlers.
-- Built-in **JSX for server-side rendering** — pages are typed components, no separate template language.
-- Small and fast with very little magic, which keeps each phase easy to spec, review, and validate.
-- Popular and actively maintained; runs on Node via `@hono/node-server` and is portable to other runtimes.
+**Perché Hono**
+- TypeScript-first, con un'ottima inferenza dei tipi per route e handler.
+- **JSX integrato per il rendering lato server**: le pagine sono componenti tipizzati, senza un linguaggio di template separato.
+- Piccolo e veloce, con pochissima "magia": ogni fase resta facile da specificare, revisionare e validare.
+- Diffuso e mantenuto attivamente; gira su Node tramite `@hono/node-server` ed è portabile su altri runtime.
 
-**Alternatives considered**
-- *Express* — the most popular, but weaker TypeScript ergonomics and an older middleware model.
-- *Fastify* — well-typed and fast, but more boilerplate for an SSR site.
-- *Next.js* — popular, but heavy and opinionated; too much surface for a small, phased demo.
+**Alternative valutate**
+- *Express*: il più diffuso, ma con un'ergonomia TypeScript più debole e un modello di middleware più datato.
+- *Fastify*: ben tipizzato e veloce, ma richiede più boilerplate per un sito SSR.
+- *Next.js*: diffuso, ma pesante e molto opinionated; troppa superficie per una piccola demo a fasi.
 
-## Rendering & UI
+## Rendering e UI
 
-- Server-rendered HTML via Hono JSX components (`Layout`, `Header`, `Footer`, pages).
-- Plain, modern CSS served as static files (CSS custom properties, flexbox/grid) — no CSS framework.
-- Progressive enhancement: the site works without client-side JavaScript; add small sprinkles only when they clearly help.
-- Target: current evergreen browsers (Chrome, Edge, Firefox, Safari).
+- HTML generato sul server tramite componenti Hono JSX (`Layout`, `Header`, `Footer`, pagine).
+- CSS semplice e moderno servito come file statici (custom properties CSS, flexbox/grid), senza framework CSS.
+- Progressive enhancement: il sito funziona senza JavaScript lato client; si aggiungono piccoli
+  ritocchi solo quando aiutano davvero.
+- Target: browser evergreen attuali (Chrome, Edge, Firefox, Safari).
 
-## Data
+## Dati
 
-- **SQLite** as the persistence layer — a single file, zero ops, ideal for a demo.
-- Access via `better-sqlite3` (synchronous, simple, fast).
-- Schema managed through plain SQL migration files, applied at startup; seed data for demos.
+- **SQLite** come livello di persistenza: un singolo file, zero gestione operativa, ideale per una demo.
+- Accesso tramite `better-sqlite3` (sincrono, semplice, veloce).
+- Schema gestito con semplici file di migrazione SQL, applicati all'avvio; dati di seed per le demo.
 
-## Tooling
+## Strumenti
 
-- `tsx` for running TypeScript in development (watch mode).
-- `tsc` for type-checking and production builds.
-- npm scripts: `dev`, `build`, `start`.
+- `tsx` per eseguire TypeScript in sviluppo (watch mode).
+- `tsc` per il type-checking e le build di produzione.
+- Script npm: `dev`, `build`, `start`.
 
-## Project layout (target)
+## Struttura del progetto (obiettivo)
 
 ```
 src/
-  index.tsx        # app entry, routes
-  components/      # Layout, Header, Footer, shared UI
-  pages/           # one component per page
-  db/              # connection, migrations, queries
-static/            # CSS, images
-specs/             # constitution + per-feature specs
+  index.tsx        # entry point dell'app, route
+  components/      # Layout, Header, Footer, UI condivisa
+  pages/           # un componente per pagina
+  db/              # connessione, migrazioni, query
+static/            # CSS, immagini
+specs/             # costituzione del progetto + specifiche per feature
 ```
