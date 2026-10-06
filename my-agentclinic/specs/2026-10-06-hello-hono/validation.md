@@ -20,7 +20,7 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 - [x] Il corpo della risposta inizia con `<!DOCTYPE html>` e contiene `<html lang="en">`,
       `<meta charset="utf-8">`, il meta tag viewport e `<title>AgentClinic</title>`.
 - [x] Il corpo contiene `<h1>Welcome to AgentClinic</h1>` e una tagline giocosa.
-- [ ] Nel browser, il titolo della scheda è "AgentClinic", e titolo e tagline vengono mostrati senza
+- [x] Nel browser, il titolo della scheda è "AgentClinic", e titolo e tagline vengono mostrati senza
       errori in console.
 - [x] Non sono stati aggiunti CSS, file statici o cartelle `components/`/`pages/` (sono rimandati alla Fase 2).
 
@@ -30,7 +30,7 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 - [x] `npm start` serve su `/` la stessa home page del server di sviluppo.
 
 ## Tracciabilità e ordine
-- [ ] Ogni task in [plan.md](./plan.md) è completato o esplicitamente segnato come rimandato.
+- [x] Ogni task in [plan.md](./plan.md) è completato o esplicitamente segnato come rimandato.
 - [x] `README.md` spiega come avviare l'app.
-- [ ] Nessun file fuori dal perimetro di [requirements.md](./requirements.md) è stato modificato.
+- [x] Nessun file fuori dal perimetro di [requirements.md](./requirements.md) è stato modificato.
 - [x] `dist/` non è committato, e `.gitignore` contiene `/dist`.
