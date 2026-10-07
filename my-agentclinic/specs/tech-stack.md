@@ -50,3 +50,13 @@ src/
 static/            # CSS, immagini
 specs/             # costituzione del progetto + specifiche per feature
 ```
+
+### Convenzione: un componente per file
+
+- Ogni componente JSX (in `components/` e in `pages/`) sta in un file separato con lo stesso nome del
+  componente (es. `Header.tsx` → `Header`) ed esporta un solo componente.
+- I componenti composti (es. `Layout`) importano i sottocomponenti dai rispettivi file e non li ridefiniscono
+  inline; nessun componente viene definito dentro `index.tsx`.
+- Gli import relativi usano l'estensione `.js` (es. `./Header.js`), come richiesto da `NodeNext`.
+- Motivazione: ogni file ha una sola responsabilità ed è facile da trovare, rivedere e modificare in
+  isolamento; le fasi successive possono riusare o sostituire un componente senza toccare gli altri.

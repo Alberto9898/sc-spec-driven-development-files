@@ -32,10 +32,14 @@ demo hanno qualcosa da aprire nel browser fin dalla prima fase.
   - `start` — `node dist/index.js`
 - Il server ascolta sulla porta **3000** e stampa il suo URL all'avvio.
 - Aggiungere `/dist` a `.gitignore`, così l'output di `npm run build` non viene committato.
+- **Estensione del perimetro:** un componente `Layout` in `src/components/` composto da tre
+  sottocomponenti `Header`, `Main`, `Footer`, e un file `static/styles.css` servito come file statico
+  da `/static/*` e collegato nel `<head>` del `Layout`. Il CSS è solo strutturale.
+  - I componenti seguono la convenzione "un componente per file" di
+    [tech-stack.md](../tech-stack.md#convenzione-un-componente-per-file).
 
 ### Escluso (fasi successive)
-- Componenti riutilizzabili (`Layout`, `Header`, `Main`, `Footer`), una cartella `pages/`, CSS,
-  file statici, branding e palette di colori, e la sezione hero (Fase 2).
+- Una cartella `pages/`, branding e palette di colori, e la sezione hero (Fase 2).
 - Database, migrazioni, dati di seed (Fase 3).
 - Un framework di test o test automatici.
 - Una variabile d'ambiente `PORT` configurabile.
@@ -49,12 +53,16 @@ demo hanno qualcosa da aprire nel browser fin dalla prima fase.
 | `module`/`moduleResolution: NodeNext` | Rispecchia la reale risoluzione ESM di Node. Conseguenza: dalla Fase 2 in poi gli import relativi devono usare l'estensione `.js` (es. `./components/Layout.js`). |
 | JSX configurato nella Fase 1 | La home page usa già JSX, così la Fase 2 aggiunge solo UI senza toccare gli strumenti. |
 | Home page HTML minimale invece di testo semplice | Dà un risultato visibile e adatto al browser già nella prima fase. La roadmap in origine diceva "restituire testo" ed è stata aggiornata di conseguenza. L'`<h1>` mantiene lo stesso messaggio "Welcome to AgentClinic". |
-| Markup della home page inline in `src/index.tsx` | Mantiene la Fase 1 a un solo file sorgente. Suddividerlo in `Layout` e `pages/Home` è esattamente lo scopo della Fase 2. |
-| Nessun CSS | Gli stili predefiniti del browser vanno bene qui; lo styling appartiene alla Fase 2. |
+| ~~Markup della home page inline in `src/index.tsx`~~ | Superata: la Fase 1 è stata estesa per includere `Layout` + `Header`/`Main`/`Footer`. Il contenuto della home resta inline in `src/index.tsx`; lo spostamento in `pages/Home` rimane alla Fase 2. |
+| ~~Nessun CSS~~ → CSS statico solo strutturale | Superata dalla stessa estensione. Il CSS copre solo la struttura della pagina (header, main centrato, footer in fondo); palette e branding restano alla Fase 2. |
+| CSS servito con `serveStatic`, non importato in TS | Senza bundler, `import './styles.css'` non funziona con `tsc`/Node. `serveStatic` di `@hono/node-server` serve `static/` e il `Layout` lo collega con `<link>`. `root: './'` dipende dalla cartella di avvio: `npm run dev`/`start` vanno lanciati dalla root del progetto. |
 | Porta fissa 3000 | L'opzione più semplice per una demo; renderla configurabile è rimandato. |
 | `/dist` in `.gitignore` | Inizialmente esclusa dal perimetro; inclusa durante l'implementazione, perché il primo `npm run build` ha reso concreto il rischio di committare l'output compilato. È una riga e non ha effetti sul resto. |
 
 ## Punti aperti / rischi
+- **Estensione del perimetro dopo la validazione (2026-10-07).** Layout a componenti e CSS statico,
+  pianificati per la Fase 2, sono stati anticipati nella Fase 1 dopo che la fase era già stata validata.
+  Le voci di validazione relative sono state aggiornate e la roadmap è stata riallineata.
 - **`dist/` non era in `.gitignore` (risolto).** Dopo il primo `npm run build` l'output compilato
   poteva essere committato per errore. Decisione: `/dist` è stato aggiunto a `.gitignore` in questa
   fase (vedi Decisioni).

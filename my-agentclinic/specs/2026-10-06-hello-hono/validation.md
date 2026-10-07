@@ -8,7 +8,7 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 - [x] `package.json` contiene `"type": "module"`, elenca `hono` e `@hono/node-server` in `dependencies`,
       ed elenca `tsx` e `typescript` in `devDependencies`.
 - [x] `tsconfig.json` usa `ES2022` / `NodeNext` con `jsxImportSource: "hono/jsx"`, e `strict` è ancora `true`.
-- [x] `src/index.ts` non esiste più, e `src/index.tsx` è l'unico file sorgente.
+- [x] `src/index.ts` non esiste più, e `src/index.tsx` è l'entry point (oltre ai componenti in `src/components/`).
 
 ## Server di sviluppo
 - [x] `npm run dev` si avvia e stampa `AgentClinic running at http://localhost:3000`.
@@ -22,7 +22,21 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 - [x] Il corpo contiene `<h1>Welcome to AgentClinic</h1>` e una tagline giocosa.
 - [x] Nel browser, il titolo della scheda è "AgentClinic", e titolo e tagline vengono mostrati senza
       errori in console.
-- [x] Non sono stati aggiunti CSS, file statici o cartelle `components/`/`pages/` (sono rimandati alla Fase 2).
+- [x] Non è stata aggiunta una cartella `pages/`, né palette o branding (rimandati alla Fase 2).
+
+## Layout e CSS
+- [x] `src/components/` contiene `Layout.tsx`, `Header.tsx`, `Main.tsx`, `Footer.tsx`, e `Layout` compone gli altri tre.
+- [x] I componenti rispettano la convenzione "un componente per file" di
+      [tech-stack.md](../tech-stack.md#convenzione-un-componente-per-file): `Header`, `Main` e `Footer` sono in file
+      separati e `Layout.tsx` li importa (`./Header.js`, `./Main.js`, `./Footer.js`).
+- [x] La risposta di `/` contiene, nell'ordine, `<header class="site-header">`, `<main class="site-main">`
+      (con `<h1>` e tagline) e `<footer class="site-footer">`.
+- [x] Il `<head>` contiene `<link rel="stylesheet" href="/static/styles.css">`.
+- [x] `curl -i http://localhost:3000/static/styles.css` restituisce `200` con `Content-Type: text/css`,
+      sia con `npm run dev` sia con `npm start`.
+- [x] Un file statico inesistente (es. `/static/nope.css`) restituisce `404`.
+- [x] Nel browser, il CSS viene applicato (header e footer separati da un bordo, footer in fondo alla pagina)
+      e non ci sono errori in console.
 
 ## Build e avvio in produzione
 - [x] `npm run build` termina con codice 0 e senza errori di tipo.

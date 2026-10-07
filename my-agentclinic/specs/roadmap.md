@@ -3,15 +3,15 @@
 Ordine di implementazione ad alto livello. Ogni fase è volutamente piccola, lascia l'app funzionante
 e ha una propria cartella di specifiche (`specs/YYYY-MM-DD-<feature>/` con requisiti, piano e validazione).
 
-## Fase 1 — Hello Hono
+## Fase 1 — Hello Hono ✅ Completata (2026-10-07)
 - Passare il progetto a ESM, aggiungere Hono + `@hono/node-server` + `tsx`; JSX configurato.
-- Un'unica route `/` che serve una home page AgentClinic minimale e senza stile (titolo
+- Un'unica route `/` che serve una home page AgentClinic minimale (titolo
   "Welcome to AgentClinic" + tagline giocosa), renderizzata inline con Hono JSX.
 - `npm run dev`, `build` e `start` funzionano.
+- (Esteso) `Layout` JSX con i componenti `Header`, `Main`, `Footer`; CSS statico strutturale servito da `/static/*`.
 
 ## Fase 2 — Struttura del layout
-- `Layout` JSX con i componenti `Header`, `Main`, `Footer`.
-- CSS statico servito; branding di base e palette di colori.
+- Branding di base e palette di colori, sul CSS statico introdotto nella Fase 1.
 - Spostare la home page della Fase 1 in `pages/Home` e farla crescere in una sezione hero giocosa.
 
 ## Fase 3 — Fondamenta del database
