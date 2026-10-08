@@ -8,7 +8,7 @@ per i criteri di merge.
      esigenza mobile di Steve, chiarimento sui non-obiettivi (niente app native).
 1.2. [tech-stack.md](../tech-stack.md): sezione "Responsive design" con criteri, approccio e verifica.
 1.3. [roadmap.md](../roadmap.md): requisito trasversale, questo intervento, indicazioni responsive per le
-     fasi 2, 4, 7 e 8; la Fase 9 diventa solo verifica d'insieme.
+     fasi 2, 4, 7 e 8 (oggi tappe 2a e 2c, fasi 4 e 5); la Fase 9 (oggi Fase 6) diventa solo verifica d'insieme.
 1.4. Note di aggiornamento nelle specifiche della [Fase 1](../2026-10-06-hello-hono/requirements.md) e di
      [Vitest](../2026-10-08-vitest/requirements.md).
 

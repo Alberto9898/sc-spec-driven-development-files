@@ -43,9 +43,9 @@ per le pagine che introduce o modifica.
 - **Testo:** corpo a 1rem minimo, leggibile senza zoom; i titoli scalano con `clamp()`. Le parole lunghe
   vanno a capo invece di allargare la pagina (`overflow-wrap`).
 - **Media:** immagini, SVG e video non superano mai il contenitore (`max-width: 100%`).
-- **Tabelle** (es. dashboard, Fase 8): su schermi stretti scorrono dentro un proprio contenitore con
+- **Tabelle** (es. dashboard, Fase 5): su schermi stretti scorrono dentro un proprio contenitore con
   `overflow-x: auto`, oppure si trasformano in schede impilate. La pagina non deve mai scorrere in orizzontale.
-- **Form** (es. prenotazioni, Fase 7): campi a tutta larghezza su mobile, etichette sopra i campi,
+- **Form** (es. prenotazioni, Fase 4): campi a tutta larghezza su mobile, etichette sopra i campi,
   tipi di input corretti (`email`, `date`, ...) per avere la tastiera giusta su mobile.
 
 **Approccio**

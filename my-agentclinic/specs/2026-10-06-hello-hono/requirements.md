@@ -40,7 +40,7 @@ demo hanno qualcosa da aprire nel browser fin dalla prima fase.
 
 ### Escluso (fasi successive)
 - Una cartella `pages/`, branding e palette di colori, e la sezione hero (Fase 2).
-- Database, migrazioni, dati di seed (Fase 3).
+- Database, migrazioni, dati di seed (Fase 3, oggi Fase 2).
 - ~~Un framework di test o test automatici.~~ Introdotti dopo la fase, in
   [2026-10-08-vitest](../2026-10-08-vitest/requirements.md); le route sono state spostate in `src/app.tsx`.
 - Una variabile d'ambiente `PORT` configurabile.

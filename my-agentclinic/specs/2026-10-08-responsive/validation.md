@@ -8,7 +8,7 @@ L'intervento può essere unito quando **ogni** voce qui sotto è spuntata.
 ## Specifiche
 - [x] [mission.md](../mission.md), [tech-stack.md](../tech-stack.md#responsive-design) e [roadmap.md](../roadmap.md)
       riportano il responsive come requisito trasversale, con criteri verificabili.
-- [x] La Fase 9 della roadmap non contiene più "Layout responsive" come lavoro da fare.
+- [x] La Fase 9 (oggi Fase 6) della roadmap non contiene più "Layout responsive" come lavoro da fare.
 
 ## Manuale (DevTools, modalità dispositivo, pagina `/`)
 
