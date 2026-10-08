@@ -10,6 +10,11 @@ e ha una propria cartella di specifiche (`specs/YYYY-MM-DD-<feature>/` con requi
 - `npm run dev`, `build` e `start` funzionano.
 - (Esteso) `Layout` JSX con i componenti `Header`, `Main`, `Footer`; CSS statico strutturale servito da `/static/*`.
 
+## Intervento — Test automatici con Vitest ✅ Completato (2026-10-08)
+- Vitest + `npm test`; `app` separata dall'avvio del server (`src/app.tsx`).
+- Le verifiche HTTP della Fase 1 diventano test automatici. Specifiche in `specs/2026-10-08-vitest/`.
+- Da qui in poi, ogni fase indica nel proprio `validation.md` quali voci sono coperte da `npm test`.
+
 ## Fase 2 — Struttura del layout
 - Branding di base e palette di colori, sul CSS statico introdotto nella Fase 1.
 - Spostare la home page della Fase 1 in `pages/Home` e farla crescere in una sezione hero giocosa.

@@ -23,3 +23,10 @@ Per la build di produzione:
 npm run build   # compila in dist/
 npm start       # avvia dist/index.js
 ```
+
+Per i test (Vitest):
+
+```bash
+npm test             # esegue la suite una volta
+npm run test:watch   # riesegue i test a ogni modifica
+```

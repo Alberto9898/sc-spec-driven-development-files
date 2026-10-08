@@ -37,16 +37,38 @@
 
 - `tsx` per eseguire TypeScript in sviluppo (watch mode).
 - `tsc` per il type-checking e le build di produzione.
-- Script npm: `dev`, `build`, `start`.
+- **Vitest** per i test automatici (vedi sotto).
+- Script npm: `dev`, `build`, `start`, `test`, `test:watch`.
+
+## Test e validazione
+
+- **Vitest** è il framework di test: nativo ESM e TypeScript (usa esbuild, quindi rispetta `jsx` e
+  `jsxImportSource` di `tsconfig.json`), API compatibile con Jest, nessuna configurazione richiesta per iniziare.
+- `npm test` (`vitest run`) esegue la suite una volta ed è il comando usato nelle checklist di validazione;
+  `npm run test:watch` (`vitest`) è pensato per lo sviluppo.
+- Le route si testano **senza avviare il server**, con `app.request('/percorso')` di Hono, verificando status,
+  header e HTML restituito.
+- Per renderlo possibile, l'istanza `app` va definita ed esportata in un modulo separato (es. `src/app.tsx`),
+  mentre `src/index.tsx` si limita ad avviare il server con `serve()`: importare un modulo che chiama `serve()`
+  aprirebbe la porta durante i test.
+- I file di test stanno in `tests/` con suffisso `.test.ts` / `.test.tsx`: `app.test.ts` per le route,
+  `components.test.tsx` per i componenti JSX, renderizzati in stringa con `.toString()`.
+- I file di test con JSX iniziano con il pragma `/** @jsxImportSource hono/jsx */`: `tsconfig.json`
+  include solo `src/`, quindi senza pragma Vitest userebbe il runtime JSX di React.
+- Vitest **non** fa type-checking: la correttezza dei tipi resta affidata a `tsc` (`npm run build`).
+- I test automatici affiancano le verifiche manuali (es. controllo visivo nel browser), non le sostituiscono:
+  ogni `validation.md` indica quali voci sono coperte da `npm test` e quali restano manuali.
 
 ## Struttura del progetto (obiettivo)
 
 ```
 src/
-  index.tsx        # entry point dell'app, route
+  app.tsx          # istanza Hono e route (importabile dai test)
+  index.tsx        # entry point: avvia il server con serve()
   components/      # Layout, Header, Footer, UI condivisa
   pages/           # un componente per pagina
   db/              # connessione, migrazioni, query
+tests/             # test Vitest (*.test.ts / *.test.tsx)
 static/            # CSS, immagini
 specs/             # costituzione del progetto + specifiche per feature
 ```

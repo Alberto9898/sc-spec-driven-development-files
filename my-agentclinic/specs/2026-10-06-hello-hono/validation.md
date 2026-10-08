@@ -3,6 +3,11 @@
 Il branch `phase-1-hello-hono` può essere unito quando **ogni** voce qui sotto è spuntata.
 Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 
+> **Aggiornamento (2026-10-08).** Con l'[introduzione di Vitest](../2026-10-08-vitest/requirements.md)
+> le voci HTTP sono coperte anche da `tests/app.test.ts` e sono segnate con *(automatizzata: `npm test`)*.
+> Le altre restano manuali. Le voci che citano `src/index.tsx` si riferiscono ora a `src/app.tsx`,
+> dove si trovano route e markup; `src/index.tsx` avvia solo il server.
+
 ## Setup
 - [x] `npm install` termina senza errori su un checkout pulito.
 - [x] `package.json` contiene `"type": "module"`, elenca `hono` e `@hono/node-server` in `dependencies`,
@@ -13,13 +18,13 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 ## Server di sviluppo
 - [x] `npm run dev` si avvia e stampa `AgentClinic running at http://localhost:3000`.
 - [x] Modificare la tagline in `src/index.tsx` provoca un riavvio automatico (il watch mode funziona).
-- [x] Un percorso sconosciuto (es. `/nope`) restituisce `404`. È il comportamento predefinito di Hono; non serve una pagina personalizzata.
+- [x] Un percorso sconosciuto (es. `/nope`) restituisce `404`. È il comportamento predefinito di Hono; non serve una pagina personalizzata. *(automatizzata: `npm test`)*
 
 ## Home page
-- [x] `curl -i http://localhost:3000/` restituisce `200` con `Content-Type: text/html; charset=UTF-8`.
+- [x] `curl -i http://localhost:3000/` restituisce `200` con `Content-Type: text/html; charset=UTF-8`. *(automatizzata: `npm test`)*
 - [x] Il corpo della risposta inizia con `<!DOCTYPE html>` e contiene `<html lang="en">`,
-      `<meta charset="utf-8">`, il meta tag viewport e `<title>AgentClinic</title>`.
-- [x] Il corpo contiene `<h1>Welcome to AgentClinic</h1>` e una tagline giocosa.
+      `<meta charset="utf-8">`, il meta tag viewport e `<title>AgentClinic</title>`. *(automatizzata: `npm test`)*
+- [x] Il corpo contiene `<h1>Welcome to AgentClinic</h1>` e una tagline giocosa. *(automatizzata: `npm test`)*
 - [x] Nel browser, il titolo della scheda è "AgentClinic", e titolo e tagline vengono mostrati senza
       errori in console.
 - [x] Non è stata aggiunta una cartella `pages/`, né palette o branding (rimandati alla Fase 2).
@@ -30,11 +35,11 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
       [tech-stack.md](../tech-stack.md#convenzione-un-componente-per-file): `Header`, `Main` e `Footer` sono in file
       separati e `Layout.tsx` li importa (`./Header.js`, `./Main.js`, `./Footer.js`).
 - [x] La risposta di `/` contiene, nell'ordine, `<header class="site-header">`, `<main class="site-main">`
-      (con `<h1>` e tagline) e `<footer class="site-footer">`.
-- [x] Il `<head>` contiene `<link rel="stylesheet" href="/static/styles.css">`.
+      (con `<h1>` e tagline) e `<footer class="site-footer">`. *(automatizzata: `npm test`)*
+- [x] Il `<head>` contiene `<link rel="stylesheet" href="/static/styles.css">`. *(automatizzata: `npm test`)*
 - [x] `curl -i http://localhost:3000/static/styles.css` restituisce `200` con `Content-Type: text/css`,
-      sia con `npm run dev` sia con `npm start`.
-- [x] Un file statico inesistente (es. `/static/nope.css`) restituisce `404`.
+      sia con `npm run dev` sia con `npm start`. *(parzialmente automatizzata: `npm test` verifica la risposta di `app`, non i due avvii)*
+- [x] Un file statico inesistente (es. `/static/nope.css`) restituisce `404`. *(automatizzata: `npm test`)*
 - [x] Nel browser, il CSS viene applicato (header e footer separati da un bordo, footer in fondo alla pagina)
       e non ci sono errori in console.
 
