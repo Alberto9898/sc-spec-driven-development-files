@@ -1,29 +1,67 @@
+/*
+ * Mobile-first: gli stili di base sono per schermi stretti (da 320px);
+ * le media query `min-width` aggiungono miglioramenti per schermi più larghi.
+ * Breakpoint di riferimento: 40rem (640px) e 64rem (1024px). Vedi specs/tech-stack.md.
+ */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+:root {
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --content-max: 60rem;
+  --tap-min: 44px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 2.5rem);
+  line-height: 1.2;
 }
 
 .site-header,
 .site-main,
 .site-footer {
-  padding: 1rem;
+  padding: 1rem var(--gutter);
 }
 
 .site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
   border-bottom: 1px solid #ddd;
 }
 
 .site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
   font-weight: bold;
   text-decoration: none;
   color: inherit;
@@ -32,7 +70,7 @@ body {
 .site-main {
   flex: 1;
   width: 100%;
-  max-width: 60rem;
+  max-width: var(--content-max);
   margin: 0 auto;
 }
 
@@ -43,4 +81,10 @@ body {
 
 .site-footer p {
   margin: 0;
+}
+
+@media (min-width: 40rem) {
+  .site-main {
+    padding-block: 2rem;
+  }
 }

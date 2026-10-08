@@ -25,7 +25,47 @@
 - CSS semplice e moderno servito come file statici (custom properties CSS, flexbox/grid), senza framework CSS.
 - Progressive enhancement: il sito funziona senza JavaScript lato client; si aggiungono piccoli
   ritocchi solo quando aiutano davvero.
-- Target: browser evergreen attuali (Chrome, Edge, Firefox, Safari).
+- Target: browser evergreen attuali (Chrome, Edge, Firefox, Safari), desktop e mobile.
+- **Responsive design** obbligatorio per tutta la UI (vedi sotto).
+
+## Responsive design
+
+Ogni pagina deve rispettare questi criteri. Valgono per tutte le fasi, e ogni `validation.md` li verifica
+per le pagine che introduce o modifica.
+
+**Criteri**
+- **Larghezze supportate:** da 320px (CSS) in su. A 320px non c'è scroll orizzontale della pagina e
+  nessun contenuto viene tagliato. Equivale al requisito di reflow WCAG 2.1 (1.4.10).
+- **Viewport:** il `Layout` include `<meta name="viewport" content="width=device-width, initial-scale=1">`.
+  Vietati `maximum-scale` e `user-scalable=no`: l'utente deve poter zoomare.
+- **Target touch:** link e pulsanti principali hanno un'area cliccabile di almeno 44×44px
+  (custom property `--tap-min`).
+- **Testo:** corpo a 1rem minimo, leggibile senza zoom; i titoli scalano con `clamp()`. Le parole lunghe
+  vanno a capo invece di allargare la pagina (`overflow-wrap`).
+- **Media:** immagini, SVG e video non superano mai il contenitore (`max-width: 100%`).
+- **Tabelle** (es. dashboard, Fase 5): su schermi stretti scorrono dentro un proprio contenitore con
+  `overflow-x: auto`, oppure si trasformano in schede impilate. La pagina non deve mai scorrere in orizzontale.
+- **Form** (es. prenotazioni, Fase 4): campi a tutta larghezza su mobile, etichette sopra i campi,
+  tipi di input corretti (`email`, `date`, ...) per avere la tastiera giusta su mobile.
+
+**Approccio**
+- **Mobile-first:** gli stili di base sono per schermi stretti; le media query usano solo `min-width`
+  per aggiungere miglioramenti sugli schermi più larghi.
+- **Breakpoint di riferimento:** `40rem` (640px, tablet) e `64rem` (1024px, desktop). Se ne aggiungono altri
+  solo quando il contenuto lo richiede. Le custom property CSS non funzionano dentro le media query, quindi
+  i valori vanno scritti per esteso.
+- **Unità fluide:** `rem`, `%`, `clamp()`, `max-width`; niente larghezze fisse in px per i contenitori.
+  Spaziature laterali con `--gutter`, larghezza massima del contenuto con `--content-max`.
+- **Layout:** flexbox e grid con `flex-wrap` / `auto-fit`, così le righe vanno a capo senza media query
+  quando possibile.
+- **Nessun JavaScript** per il layout responsive: solo CSS, coerente con il progressive enhancement.
+
+**Verifica**
+- **Automatica (Vitest):** solo ciò che si vede nell'HTML, cioè il viewport meta senza blocco dello zoom.
+- **Manuale:** nei DevTools del browser (modalità dispositivo), ogni pagina nuova o modificata si controlla a
+  **320px, 768px e 1280px**: niente scroll orizzontale, testo leggibile, target touch utilizzabili,
+  nessuna sovrapposizione. Vitest non esegue il layout, quindi questi controlli non si possono
+  automatizzare con lo stack attuale (servirebbe un browser headless, es. Playwright).
 
 ## Dati
 
@@ -37,16 +77,39 @@
 
 - `tsx` per eseguire TypeScript in sviluppo (watch mode).
 - `tsc` per il type-checking e le build di produzione.
-- Script npm: `dev`, `build`, `start`.
+- **Vitest** per i test automatici (vedi sotto).
+- Script npm: `dev`, `build`, `start`, `test`, `test:watch`.
+
+## Test e validazione
+
+- **Vitest** è il framework di test: nativo ESM e TypeScript (usa esbuild, quindi rispetta `jsx` e
+  `jsxImportSource` di `tsconfig.json`), API compatibile con Jest, nessuna configurazione richiesta per iniziare.
+- `npm test` (`vitest run`) esegue la suite una volta ed è il comando usato nelle checklist di validazione;
+  `npm run test:watch` (`vitest`) è pensato per lo sviluppo.
+- Le route si testano **senza avviare il server**, con `app.request('/percorso')` di Hono, verificando status,
+  header e HTML restituito.
+- Per renderlo possibile, l'istanza `app` va definita ed esportata in un modulo separato (es. `src/app.tsx`),
+  mentre `src/index.tsx` si limita ad avviare il server con `serve()`: importare un modulo che chiama `serve()`
+  aprirebbe la porta durante i test.
+- I file di test stanno in `tests/` con suffisso `.test.ts` / `.test.tsx`: `app.test.ts` per le route,
+  `components.test.tsx` per i componenti JSX, renderizzati in stringa con `.toString()`.
+- I file di test con JSX iniziano con il pragma `/** @jsxImportSource hono/jsx */`: `tsconfig.json`
+  include solo `src/`, quindi senza pragma Vitest userebbe il runtime JSX di React.
+- Il responsive design ha una parte automatizzabile e una manuale: vedi [Responsive design](#responsive-design).
+- Vitest **non** fa type-checking: la correttezza dei tipi resta affidata a `tsc` (`npm run build`).
+- I test automatici affiancano le verifiche manuali (es. controllo visivo nel browser), non le sostituiscono:
+  ogni `validation.md` indica quali voci sono coperte da `npm test` e quali restano manuali.
 
 ## Struttura del progetto (obiettivo)
 
 ```
 src/
-  index.tsx        # entry point dell'app, route
+  app.tsx          # istanza Hono e route (importabile dai test)
+  index.tsx        # entry point: avvia il server con serve()
   components/      # Layout, Header, Footer, UI condivisa
   pages/           # un componente per pagina
   db/              # connessione, migrazioni, query
+tests/             # test Vitest (*.test.ts / *.test.tsx)
 static/            # CSS, immagini
 specs/             # costituzione del progetto + specifiche per feature
 ```
