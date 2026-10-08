@@ -25,7 +25,47 @@
 - CSS semplice e moderno servito come file statici (custom properties CSS, flexbox/grid), senza framework CSS.
 - Progressive enhancement: il sito funziona senza JavaScript lato client; si aggiungono piccoli
   ritocchi solo quando aiutano davvero.
-- Target: browser evergreen attuali (Chrome, Edge, Firefox, Safari).
+- Target: browser evergreen attuali (Chrome, Edge, Firefox, Safari), desktop e mobile.
+- **Responsive design** obbligatorio per tutta la UI (vedi sotto).
+
+## Responsive design
+
+Ogni pagina deve rispettare questi criteri. Valgono per tutte le fasi, e ogni `validation.md` li verifica
+per le pagine che introduce o modifica.
+
+**Criteri**
+- **Larghezze supportate:** da 320px (CSS) in su. A 320px non c'è scroll orizzontale della pagina e
+  nessun contenuto viene tagliato. Equivale al requisito di reflow WCAG 2.1 (1.4.10).
+- **Viewport:** il `Layout` include `<meta name="viewport" content="width=device-width, initial-scale=1">`.
+  Vietati `maximum-scale` e `user-scalable=no`: l'utente deve poter zoomare.
+- **Target touch:** link e pulsanti principali hanno un'area cliccabile di almeno 44×44px
+  (custom property `--tap-min`).
+- **Testo:** corpo a 1rem minimo, leggibile senza zoom; i titoli scalano con `clamp()`. Le parole lunghe
+  vanno a capo invece di allargare la pagina (`overflow-wrap`).
+- **Media:** immagini, SVG e video non superano mai il contenitore (`max-width: 100%`).
+- **Tabelle** (es. dashboard, Fase 8): su schermi stretti scorrono dentro un proprio contenitore con
+  `overflow-x: auto`, oppure si trasformano in schede impilate. La pagina non deve mai scorrere in orizzontale.
+- **Form** (es. prenotazioni, Fase 7): campi a tutta larghezza su mobile, etichette sopra i campi,
+  tipi di input corretti (`email`, `date`, ...) per avere la tastiera giusta su mobile.
+
+**Approccio**
+- **Mobile-first:** gli stili di base sono per schermi stretti; le media query usano solo `min-width`
+  per aggiungere miglioramenti sugli schermi più larghi.
+- **Breakpoint di riferimento:** `40rem` (640px, tablet) e `64rem` (1024px, desktop). Se ne aggiungono altri
+  solo quando il contenuto lo richiede. Le custom property CSS non funzionano dentro le media query, quindi
+  i valori vanno scritti per esteso.
+- **Unità fluide:** `rem`, `%`, `clamp()`, `max-width`; niente larghezze fisse in px per i contenitori.
+  Spaziature laterali con `--gutter`, larghezza massima del contenuto con `--content-max`.
+- **Layout:** flexbox e grid con `flex-wrap` / `auto-fit`, così le righe vanno a capo senza media query
+  quando possibile.
+- **Nessun JavaScript** per il layout responsive: solo CSS, coerente con il progressive enhancement.
+
+**Verifica**
+- **Automatica (Vitest):** solo ciò che si vede nell'HTML, cioè il viewport meta senza blocco dello zoom.
+- **Manuale:** nei DevTools del browser (modalità dispositivo), ogni pagina nuova o modificata si controlla a
+  **320px, 768px e 1280px**: niente scroll orizzontale, testo leggibile, target touch utilizzabili,
+  nessuna sovrapposizione. Vitest non esegue il layout, quindi questi controlli non si possono
+  automatizzare con lo stack attuale (servirebbe un browser headless, es. Playwright).
 
 ## Dati
 
@@ -55,6 +95,7 @@
   `components.test.tsx` per i componenti JSX, renderizzati in stringa con `.toString()`.
 - I file di test con JSX iniziano con il pragma `/** @jsxImportSource hono/jsx */`: `tsconfig.json`
   include solo `src/`, quindi senza pragma Vitest userebbe il runtime JSX di React.
+- Il responsive design ha una parte automatizzabile e una manuale: vedi [Responsive design](#responsive-design).
 - Vitest **non** fa type-checking: la correttezza dei tipi resta affidata a `tsc` (`npm run build`).
 - I test automatici affiancano le verifiche manuali (es. controllo visivo nel browser), non le sostituiscono:
   ogni `validation.md` indica quali voci sono coperte da `npm test` e quali restano manuali.

@@ -43,6 +43,9 @@ Tutte le verifiche sono manuali; in questa fase non c'è un framework di test.
 - [x] Nel browser, il CSS viene applicato (header e footer separati da un bordo, footer in fondo alla pagina)
       e non ci sono errori in console.
 
+> Le verifiche responsive di header, main e footer (320px, 768px, 1280px) sono in
+> [2026-10-08-responsive/validation.md](../2026-10-08-responsive/validation.md).
+
 ## Build e avvio in produzione
 - [x] `npm run build` termina con codice 0 e senza errori di tipo.
 - [x] `dist/index.js` esiste ed è output ES module (`import`, non `require`).

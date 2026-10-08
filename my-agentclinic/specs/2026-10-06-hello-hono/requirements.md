@@ -45,6 +45,10 @@ demo hanno qualcosa da aprire nel browser fin dalla prima fase.
   [2026-10-08-vitest](../2026-10-08-vitest/requirements.md); le route sono state spostate in `src/app.tsx`.
 - Una variabile d'ambiente `PORT` configurabile.
 
+> **Aggiornamento (2026-10-08).** Il responsive design è diventato un requisito di prodotto
+> ([missione](../mission.md#principi), [criteri](../tech-stack.md#responsive-design)). Il CSS strutturale di questa
+> fase è stato reso mobile-first in [2026-10-08-responsive](../2026-10-08-responsive/requirements.md).
+
 ## Decisioni
 
 | Decisione | Motivazione |

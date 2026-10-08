@@ -15,6 +15,8 @@ mostrare come si costruisce una web app reale e ben strutturata, a piccoli passi
   un appuntamento in pochi clic.
 - Lo staff ha una dashboard che offre una visione d'insieme immediata di agenti, appuntamenti e trattamenti.
 - Il sito è affidabile, gradevole e funziona bene in qualsiasi browser moderno.
+- Ogni pagina è usabile e leggibile su smartphone, tablet e desktop (da 320px di larghezza in su),
+  senza scroll orizzontale e senza dover zoomare.
 - Ogni feature è tracciabile dalla specifica all'implementazione fino alla validazione.
 
 ## Pubblico di riferimento
@@ -32,7 +34,7 @@ mostrare come si costruisce una web app reale e ben strutturata, a piccoli passi
 |---|---|---|
 | Mary | Engineering | Un sito affidabile su uno stack TypeScript diffuso; una dashboard per agenti e staff |
 | Susan | Product | Funzionalità su agenti, disturbi, terapie e prenotazione degli appuntamenti |
-| Steve | Marketing | Un sito gradevole che funzioni bene nei browser moderni |
+| Steve | Marketing | Un sito gradevole che funzioni bene nei browser moderni, anche da smartphone (es. per chi visita gli stand) |
 
 ## Dominio principale
 
@@ -49,9 +51,12 @@ mostrare come si costruisce una web app reale e ben strutturata, a piccoli passi
 2. **Prima le specifiche, poi il codice.** Ogni feature ha requisiti, un piano e una checklist di validazione.
 3. **Giocoso, non sciatto.** Battute nei testi; rigore nel codice.
 4. **Server-first.** HTML generato sul server; JavaScript lato client ridotto al minimo.
+5. **Responsive per definizione.** Ogni pagina nasce mobile-first e si adatta a qualsiasi larghezza dello
+   schermo. È un requisito di ogni fase, non una rifinitura finale: i criteri sono in
+   [tech-stack.md](./tech-stack.md#responsive-design).
 
 ## Non-obiettivi (per ora)
 
 - Autenticazione reale, pagamenti o multi-tenancy.
 - Integrazione effettiva con agenti AI reali.
-- App mobile native.
+- App mobile native: l'esperienza mobile passa dal sito responsive.

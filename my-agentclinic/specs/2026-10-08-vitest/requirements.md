@@ -28,7 +28,8 @@ comportamento dell'app.
 - Aggiornare `README.md` con il comando dei test.
 
 ### Escluso
-- Test nel browser, test end-to-end, test visivi del CSS.
+- Test nel browser, test end-to-end, test visivi del CSS. Di conseguenza, il layout responsive si verifica
+  a mano (vedi [tech-stack.md](../tech-stack.md#responsive-design)); Vitest controlla solo il viewport meta.
 - Coverage e soglie minime di copertura.
 - Type-checking dei file di test (vedi Punti aperti).
 - CI.

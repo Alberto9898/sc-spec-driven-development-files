@@ -69,6 +69,13 @@ describe('Layout', () => {
     expect(html).not.toContain('<script>')
   })
 
+  it('sets a responsive viewport that allows zooming', async () => {
+    const html = await page()
+    const viewport = html.match(/<meta name="viewport" content="([^"]*)"\/>/)
+    expect(viewport?.[1]).toBe('width=device-width, initial-scale=1')
+    expect(html).not.toMatch(/user-scalable|maximum-scale/)
+  })
+
   it('links the stylesheet in the head', async () => {
     const html = await page()
     const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>'))
